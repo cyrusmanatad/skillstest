@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckCustomer
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class CheckAdmin
     public function handle(Request $request, Closure $next): Response
     {
 
-        if ($request->user()->role != 1) {
-            return redirect()->route('customer.dashboard');
+        if ($request->user()->role == 1) {
+            return redirect()->route('admin.dashboard');
         }
 
         return $next($request);
