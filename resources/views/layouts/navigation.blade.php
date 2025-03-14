@@ -25,11 +25,11 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             @guest
-                                Hello, Visitor!
+                                <div>Welcome, Visitor!</div>
                             @endguest
 
                             @auth
-                            <div>{{ Auth::user()->name }}</div>
+                                <div>Welcome, {{ Auth::user()->name }}</div>
                             @endauth
 
                             <div class="ms-1">
@@ -46,6 +46,23 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+
+                        {{-- 1: Admin --}}
+                        @if(Auth::user()->role == 1)
+                        <x-dropdown-link :href="route('user.list')">
+                            {{ __('Users') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('admin.product.list')">
+                            {{ __('Products') }}
+                        </x-dropdown-link>
+                        @endif
+                        
+                        {{-- 2: Customer --}}
+                        @if(Auth::user()->role == 2)
+                        <x-dropdown-link :href="route('product.list')">
+                            {{ __('Products') }}
+                        </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

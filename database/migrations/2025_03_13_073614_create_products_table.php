@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body')->nullable();
+            $table->string('image')->nullable();
             $table->tinyInteger('del_flag')->default(1); // 1: active, 0: deleted
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

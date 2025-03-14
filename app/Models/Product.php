@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'body', 'user_id', 'del_flag'];
+    protected $fillable = ['title', 'body', 'user_id', 'del_flag', 'image'];
 
     protected static function booted()
     {
@@ -22,5 +22,10 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function fromUser($userId)
+    {
+        return $this->where('user_id', $userId)->get();
     }
 }
