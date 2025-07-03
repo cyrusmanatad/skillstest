@@ -1,5 +1,8 @@
-## Skills Test for Laravel Application - VIPTutors.co
+## Simple Laravel CRUD Application - Customer Product Dashboard
 
-## Question2: What are the coding principles/practices you can apply in your code?
+## Apply coding principles and practices.
 
- - SOLID principles, DRY, KISS, YAGNI
+ - SOLID
+ - DRY 
+ - KISS
+ - YAGNI
