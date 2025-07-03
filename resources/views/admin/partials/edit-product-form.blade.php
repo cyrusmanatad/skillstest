@@ -16,13 +16,13 @@
         <div>
             <x-input-label for="create_product_title" :value="__('Product Name')" />
             <x-text-input id="create_product_title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $product->title)" autocomplete="new-title" />
-            <x-input-error :messages="$errors->productCreate->get('title')" class="mt-2" />
+            <x-input-error :messages="$errors->get('title')" class="mt-2" />
         </div>
 
         <div>
             <x-input-label for="create_product_body" :value="__('Description')" />
             <x-text-input id="create_product_body" name="body" type="text" class="mt-1 block w-full" :value="old('body', $product->body)" autocomplete="new-body" />
-            <x-input-error :messages="$errors->productCreate->get('body')" class="mt-2" />
+            <x-input-error :messages="$errors->get('body')" class="mt-2" />
         </div>
 
         <div>
@@ -34,7 +34,7 @@
                 :options="$mappedUsers" 
                 :selected="old('user_id', $product->user_id)" 
             />
-            <x-input-error :messages="$errors->productCreate->get('body')" class="mt-2" />
+            {{-- <x-input-error :messages="$errors->get('body')" class="mt-2" /> --}}
 
         </div>
 
