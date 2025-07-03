@@ -61,12 +61,7 @@ class AdminDashboardController extends Controller
         });
 
         // map user_id and name for select option
-        $mappedUsers = $mappedUsers->map(function ($user) {
-            return [
-                'key' => $user->id,
-                'text' => $user->name,
-            ];
-        });
+        $mappedUsers = $mappedUsers->map(fn ($user) => [ 'key' => $user->id, 'text' => $user->name ]);
 
         return view('admin.index', [
             'page' => 'edit',
