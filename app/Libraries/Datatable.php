@@ -5,7 +5,7 @@ namespace App\Libraries;
 /*
  * Helper functions for building a DataTables server-side processing SQL query
  *
- * The static functions in this class are just helper functions to help build
+ * The public static functions in this class are just helper functions to help build
  * the SQL used in the DataTables demo server-side processing scripts. These
  * functions obviously do not represent all that can be done with server-side
  * processing, they are intentionally simple to show how it works. More complex
@@ -28,12 +28,12 @@ class Datatable {
 	 *  @param  array $data    Data from the SQL get
 	 *  @return array          Formatted data in a row based format
 	 */
-	static function data_output ( $columns, $data )
+	public static function data_output ( $columns, $data )
 	{
-		$out = array();
+		$out = [];
 
 		for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
-			$row = array();
+			$row = [];
 
 			for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ ) {
 				$column = $columns[$j];
@@ -77,7 +77,7 @@ class Datatable {
 	 *     * pass - user password
 	 *  @return resource PDO connection
 	 */
-	static function db ( $conn )
+	public static function db ( $conn )
 	{
 		if ( is_array( $conn ) ) {
 			return self::sql_connect( $conn );
@@ -96,7 +96,7 @@ class Datatable {
 	 *  @param  array $columns Column information array
 	 *  @return string SQL limit clause
 	 */
-	static function limit ( $request, $columns )
+	public static function limit ( $request, $columns )
 	{
 		$limit = '';
 
@@ -117,12 +117,12 @@ class Datatable {
 	 *  @param  array $columns Column information array
 	 *  @return string SQL order by clause
 	 */
-	static function order ( $request, $columns )
+	public static function order ( $request, $columns )
 	{
 		$order = '';
 
 		if ( isset($request['order']) && count($request['order']) ) {
-			$orderBy = array();
+			$orderBy = [];
 			$dtColumns = self::pluck( $columns, 'dt' );
 
 			for ( $i=0, $ien=count($request['order']) ; $i<$ien ; $i++ ) {
@@ -166,10 +166,10 @@ class Datatable {
 	 *    sql_exec() function
 	 *  @return string SQL where clause
 	 */
-	static function filter ( $request, $columns, &$bindings, ?int $userId = null )
+	public static function filter ( $request, $columns, &$bindings, ?int $userId = null )
 	{
-		$globalSearch = array();
-		$columnSearch = array();
+		$globalSearch = [];
+		$columnSearch = [];
 		$dtColumns = self::pluck( $columns, 'dt' );
 
 		if ( isset($request['search']) && $request['search']['value'] != '' ) {
@@ -247,9 +247,9 @@ class Datatable {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns, $userId = null )
+	public static function simple ( $request, $conn, $table, $primaryKey, $columns, $userId = null )
 	{
-		$bindings = array();
+		$bindings = [];
 		$db = self::db( $conn );
 
 		// Build the SQL query string from the request
@@ -318,12 +318,12 @@ class Datatable {
 	 *  @param  string $whereAll WHERE condition to apply to all queries
 	 *  @return array          Server-side processing response array
 	 */
-	static function complex ( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null )
+	public static function complex ( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null )
 	{
-		$bindings = array();
+		$bindings = [];
 		$db = self::db( $conn );
-		$localWhereResult = array();
-		$localWhereAll = array();
+		$localWhereResult = [];
+		$localWhereAll = [];
 		$whereAllSql = '';
 
 		// Build the SQL query string from the request
@@ -398,7 +398,7 @@ class Datatable {
 	 *     * pass - user password
 	 * @return object|resource Database connection handle
 	 */
-	static function sql_connect ( $sql_details )
+	public static function sql_connect ( $sql_details )
 	{
 		try {
 			$db = @new PDO(
@@ -429,7 +429,7 @@ class Datatable {
 	 * @param  string   $sql SQL query to execute.
 	 * @return array         Result from the query (all rows)
 	 */
-	static function sql_exec ( $db, $bindings, $sql=null )
+	public static function sql_exec ( $db, $bindings, $sql=null )
 	{
 		// Argument shifting
 		if ( $sql === null ) {
@@ -472,7 +472,7 @@ class Datatable {
 	 *
 	 * @param  string $msg Message to send to the client
 	 */
-	static function fatal ( $msg )
+	public static function fatal ( $msg )
 	{
 		echo json_encode( array( 
 			"error" => $msg
@@ -491,7 +491,7 @@ class Datatable {
 	 * @return string       Bound key to be used in the SQL where this parameter
 	 *   would be used.
 	 */
-	static function bind ( &$a, $val, $type )
+	public static function bind ( &$a, $val, $type )
 	{
 		$key = ':binding_'.count( $a );
 
@@ -513,9 +513,9 @@ class Datatable {
 	 *  @param  string $prop Property to read
 	 *  @return array        Array of property values
 	 */
-	static function pluck ( $a, $prop )
+	public static function pluck ( $a, $prop )
 	{
-		$out = array();
+		$out = [];
 
 		for ( $i=0, $len=count($a) ; $i<$len ; $i++ ) {
             if(empty($a[$i][$prop])){
@@ -537,7 +537,7 @@ class Datatable {
 	 * @param  string $join Glue for the concatenation
 	 * @return string Joined string
 	 */
-	static function _flatten ( $a, $join = ' AND ' )
+	public static function _flatten ( $a, $join = ' AND ' )
 	{
 		if ( ! $a ) {
 			return '';

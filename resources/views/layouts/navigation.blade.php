@@ -48,7 +48,7 @@
                         </x-dropdown-link>
 
                         {{-- 1: Admin --}}
-                        @if(Auth::user()->role == 1)
+                        @if(Auth::user()->roles()->whereIn('role_id', [1])->exists())
                         <x-dropdown-link :href="route('user.list')">
                             {{ __('Users') }}
                         </x-dropdown-link>
@@ -58,7 +58,7 @@
                         @endif
                         
                         {{-- 2: Customer --}}
-                        @if(Auth::user()->role == 2)
+                        @if(Auth::user()->roles()->whereIn('role_id', [1])->doesntExist())
                         <x-dropdown-link :href="route('product.list')">
                             {{ __('Products') }}
                         </x-dropdown-link>

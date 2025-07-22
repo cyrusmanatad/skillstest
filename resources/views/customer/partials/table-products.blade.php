@@ -14,20 +14,25 @@
     <table id="dataTable" class="w-full">
         <thead class="bg-gray-50">
             <tr>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
-                uppercase tracking-wider">
-                {{ __('Product Name') }}
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
+                {{ __('SKU Code') }}
                 </th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
-                uppercase tracking-wider">
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
+                {{ __('Product') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
                 {{ __('Description') }}
                 </th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
-                uppercase tracking-wider">
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
+                {{ __('Price') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
+                {{ __('Price Adjustment') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
                 {{ __('Created') }}
                 </th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
-                uppercase tracking-wider">
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase tracking-wider">
                 {{ __('Action') }}
                 </th>
             </tr>

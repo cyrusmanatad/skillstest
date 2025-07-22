@@ -64,7 +64,7 @@ class AdminDashboardController extends Controller
         $mappedUsers = $mappedUsers->map(fn ($user) => [ 'key' => $user->id, 'text' => $user->name ]);
 
         return view('admin.index', [
-            'page' => 'edit',
+            'page' => 'edit',   
             'user' => $request->user(),
             'product' => Product::find($productId),
             'mappedUsers' => $mappedUsers,

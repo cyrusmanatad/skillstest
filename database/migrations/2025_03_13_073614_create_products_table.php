@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('body')->nullable();
+            $table->string('title')->unique();
+            $table->text('description')->nullable();
+            $table->string('sku_code')->unique();
+            $table->decimal('price', 10, 2);
+            $table->decimal('price_adjustment', 10, 2)->default(0); // Default to 0 if not provided
             $table->string('image')->nullable();
             $table->tinyInteger('del_flag')->default(1); // 1: active, 0: deleted
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

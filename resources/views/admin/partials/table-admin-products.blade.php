@@ -16,11 +16,23 @@
             <tr>
                 <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
                 uppercase tracking-wider">
-                {{ __('Product Name') }}
+                {{ __('SKU Code') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
+                uppercase tracking-wider">
+                {{ __('Product') }}
                 </th>
                 <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
                 uppercase tracking-wider">
                 {{ __('Description') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
+                uppercase tracking-wider">
+                {{ __('Price') }}
+                </th>
+                <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
+                uppercase tracking-wider">
+                {{ __('Price Adjustment') }}
                 </th>
                 <th class="px-4 py-2 text-left text-xs text-gray-500 uppercase
                 uppercase tracking-wider">
@@ -55,6 +67,9 @@
                 data: (d) => {
                     d.division = 'test'
                 }
+            },
+            createdRow: function(row, data, dataIndex) {
+                $('td', row).addClass('text-xs');
             }
         });
     })

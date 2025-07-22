@@ -57,7 +57,10 @@
                 data: (d) => {
                     d.division = 'test'
                 }
+            },
+            createdRow: function(row, data, dataIndex) {
+                $(row).addClass('text-xs');
             }
         });
-    })
+    });
 </script>

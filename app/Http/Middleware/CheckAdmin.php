@@ -16,7 +16,7 @@ class CheckAdmin
     public function handle(Request $request, Closure $next): Response
     {
 
-        if ($request->user()->role != 1) {
+        if ($request->user()->roles()->whereIn('role_id', [1])->doesntExist()) {
             return redirect()->route('customer.dashboard');
         }
 

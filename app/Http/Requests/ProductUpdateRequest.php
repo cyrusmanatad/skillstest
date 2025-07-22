@@ -24,7 +24,10 @@ class ProductUpdateRequest extends FormRequest
                 'max:255', 
                 Rule::unique(Product::class)->ignore($productId)
             ],
-            'body' => ['required', 'string', 'max:255']
+            'description' => ['max:255'],
+            'sku_code' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
+            'price_adjustment' => ['max:10'],
         ];
     }
 }

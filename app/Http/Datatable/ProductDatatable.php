@@ -12,10 +12,7 @@ class ProductDatatable
     private function deleteBladeTemplateAction(Request $request, $route, $productId) {
         // Render the Blade components manually before returning them
         $deleteButtonHtml = Blade::render('
-            <x-danger-button
-                x-data=""
-                x-on:click.prevent="$dispatch(\'open-modal\', \'confirm-user-deletion\')"
-            >{{ __("Delete") }}</x-danger-button>
+            <x-heroicon-o-trash x-on:click.prevent="$dispatch(\'open-modal\', \'confirm-user-deletion\')" class="h-5 w-5" style="color: red; cursor: pointer" />
         ', ['errors' => $request->session()->get('errors')]);
 
         $modalHtml = Blade::render('
@@ -56,9 +53,7 @@ class ProductDatatable
     private function editBladeTemplateAction(Request $request, $route, $productId) {
         // Render the Blade components manually before returning them
         return Blade::render('
-            <x-action-link :href="route($route, $id)">
-                {{ __(\'Edit\') }}
-            </x-action-link>
+            <x-heroicon-o-pencil-square x-on:click.prevent="window.location.href = \'' . route($route, $productId) . '\'" class="h-5 w-5" style="cursor: pointer" />
         ', [
             'errors' => $request->session()->get('errors'),
             'route' => $route,
@@ -69,10 +64,13 @@ class ProductDatatable
     public function customer(Request $request)
     {
         $columns = [
-            [ 'db' => 'title', 'dt' => 0 ],
-            [ 'db' => 'body', 'dt' => 1 ],
-            [ 'db' => 'created_at', 'dt' => 2 ],
-            [ 'db' => 'id', 'dt' => 3, 'formatter' => function($d) use($request) {
+            [ 'db' => 'sku_code', 'dt' => 0 ],
+            [ 'db' => 'title', 'dt' => 1 ],
+            [ 'db' => 'description', 'dt' => 2 ],
+            [ 'db' => 'price', 'dt' => 3 ],
+            [ 'db' => 'price_adjustment', 'dt' => 4 ],
+            [ 'db' => 'created_at', 'dt' => 5 ],
+            [ 'db' => 'id', 'dt' => 6, 'formatter' => function($d) use($request) {
                 return $this->editBladeTemplateAction($request, 'product.edit', $d) . $this->deleteBladeTemplateAction($request, 'product.destroy', $d);
             } ]
         ];
@@ -92,16 +90,23 @@ class ProductDatatable
     public function admin(Request $request)
     {
         $columns = [
-            [ 'db' => 'title', 'dt' => 0 ],
-            [ 'db' => 'body', 'dt' => 1 ],
-            [ 'db' => 'created_at', 'dt' => 2 ],
-            [ 'db' => 'id', 'dt' => 3, 'formatter' => function($d, $row) use($request) {
+            [ 'db' => 'sku_code', 'dt' => 0 ],
+            [ 'db' => 'title', 'dt' => 1 ],
+            [ 'db' => 'description', 'dt' => 2 ],
+            [ 'db' => 'price', 'dt' => 3 ],
+            [ 'db' => 'price_adjustment', 'dt' => 4 ],
+            [ 'db' => 'created_at', 'dt' => 5 ],
+            [ 'db' => 'id', 'dt' => 6, 'formatter' => function($d, $row) use($request) {
 
                 if($request->user()->id == $row['user_id']) {
-                    return $this->editBladeTemplateAction($request, 'admin.product.edit', $d) . $this->deleteBladeTemplateAction($request, 'admin.product.destroy', $d);
+                    return "<div class='flex'>
+                        " . $this->editBladeTemplateAction($request, 'admin.product.edit', $d) . "
+                        " . $this->deleteBladeTemplateAction($request, 'admin.product.destroy', $d) . "
+                    </div>";
+                    // return $this->editBladeTemplateAction($request, 'admin.product.edit', $d) . $this->deleteBladeTemplateAction($request, 'admin.product.destroy', $d);
                 }
 
-                return "actions not allowed";
+                return "-";
             } ],
             [ 'db' => 'user_id', 'dt' => null ]
         ];
